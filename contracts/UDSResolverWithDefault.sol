@@ -2,8 +2,8 @@
 
 pragma solidity ^0.7.0;
 
-import '@openzeppelin/contracts/access/Ownable.sol';
-import './UDSResolverWithFallback.sol';
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "./UDSResolverWithFallback.sol";
 
 contract UDSResolverWithDefault is UDSResolverWithFallback, Ownable
 {

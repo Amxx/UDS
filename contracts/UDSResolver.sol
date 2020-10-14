@@ -2,11 +2,11 @@
 
 pragma solidity ^0.7.0;
 
-import '@openzeppelin/contracts/GSN/Context.sol';
+import "@openzeppelin/contracts/GSN/Context.sol";
 
 contract UDSResolver is Context
 {
-    mapping(address => mapping(bytes32 => bytes)) private store;
+    mapping(address => mapping(bytes32 => bytes)) private _store;
 
     event ValueUpdated(address indexed account, bytes32 indexed key);
 
@@ -24,13 +24,13 @@ contract UDSResolver is Context
     function _setData(address account, bytes32 key, bytes memory data)
     internal virtual
     {
-        store[account][key] = data;
+        _store[account][key] = data;
         emit ValueUpdated(account, key);
     }
 
     function _getData(address account, bytes32 key)
     internal virtual view returns (bytes memory)
     {
-        return store[account][key];
+        return _store[account][key];
     }
 }

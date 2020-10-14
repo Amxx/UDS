@@ -2,7 +2,7 @@
 
 pragma solidity ^0.7.0;
 
-import '@openzeppelin/contracts/GSN/Context.sol';
+import "@openzeppelin/contracts/GSN/Context.sol";
 
 contract UDSRegistry is Context
 {

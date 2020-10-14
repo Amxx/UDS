@@ -2,11 +2,11 @@
 
 pragma solidity ^0.7.0;
 
-import './UDSResolver.sol';
+import "./UDSResolver.sol";
 
 contract UDSResolverWithFallback is UDSResolver
 {
-    mapping(address => address) private delegation;
+    mapping(address => address) private _delegation;
 
     event DelegationUpdated(address indexed account, address delegateTo);
 
@@ -14,14 +14,14 @@ contract UDSResolverWithFallback is UDSResolver
     external
     {
         address account = _msgSender();
-        delegation[account] = delegateTo;
+        _delegation[account] = delegateTo;
         emit DelegationUpdated(account, delegateTo);
     }
 
     function getDelegation(address account)
     external view returns (address)
     {
-        return delegation[account];
+        return _delegation[account];
     }
 
     function _getData(address account, bytes32 key)
@@ -30,7 +30,7 @@ contract UDSResolverWithFallback is UDSResolver
         value = super._getData(account, key);
         if (value.length == 0)
         {
-            address delegateTo = delegation[account];
+            address delegateTo = _delegation[account];
             // stop loops (particularly on address 0)
             if (delegateTo != account)
             {
